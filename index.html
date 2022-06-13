@@ -17,6 +17,7 @@
                 return {
                     title: "Aprendiendo Vue",
                     text: "Curso de platzi",
+                    counter: 0,
                     textHtml: "<p>Tamaño de la imagen (px)</p>",
                     img: {
                         height: 200,
@@ -24,10 +25,22 @@
                     }
                 };
             },
+            methods: {
+                increment() {
+                    this.counter++;
+                },
+                decrement() {
+                    if (this.counter > 0)
+                        this.counter--;
+                }
+            },
             template: `
                 <div>
                     <h1 v-once v-text="title"></h1>
                     <h6>{{ text }}</h6>
+                    <button v-on:click="decrement">-</button>
+                    {{ counter }}
+                    <button v-on:click="increment">+</button>
                     <div v-html="textHtml"></div>
                     <input type="list" v-model="img.height"/>
                     <br><br>
