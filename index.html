@@ -16,6 +16,9 @@
             data() {
                 return {
                     title: "Aprendiendo Vue",
+                    firstName: "Andres",
+                    lastName: "Perdomo",
+                    now: new Date(),
                     text: "Curso de platzi",
                     counter: 0,
                     textHtml: "<p>Tamaño de la imagen (px)</p>",
@@ -34,14 +37,29 @@
                         this.counter--;
                 }
             },
+            computed: {
+                fullName() {
+                    return this.firstName + ' ' + this.lastName;
+                },
+                today() {
+                    return this.now.toLocaleDateString();
+                }
+            },
             template: `
                 <div>
                     <h1 v-once v-text="title"></h1>
                     <h6>{{ text }}</h6>
+                    <hr>
+
+                    <div>
+                        {{ fullName }}<br>{{ today }}
+                    </div>
+                    <hr>
 
                     <button @click="decrement">-</button>
                     {{ counter }}
                     <button @click="increment">+</button>
+                    <hr>
 
                     <div v-html="textHtml"></div>
                     <input type="list" v-model="img.height"/>
