@@ -19,6 +19,8 @@
                     firstName: "Andres",
                     lastName: "Perdomo",
                     now: new Date(),
+                    door: "🚪Puerta cerrada",
+                    doorOpen: false,
                     text: "Curso de platzi",
                     counter: 0,
                     textHtml: "<p>Tamaño de la imagen (px)</p>",
@@ -43,6 +45,14 @@
                 },
                 today() {
                     return this.now.toLocaleDateString();
+                },
+                labelDoorButton() {
+                    return this.doorOpen ? "Cerrar" : "Abrir";
+                }
+            },
+            watch: {
+                doorOpen(value, old) {
+                    this.door = value ? "🚪Puerta abierta" : "🚪Puerta cerrada";
                 }
             },
             template: `
@@ -53,6 +63,12 @@
 
                     <div>
                         {{ fullName }}<br>{{ today }}
+                    </div>
+                    <hr>
+
+                    <div>
+                        {{ door }}<br>
+                        <button @click="doorOpen = !doorOpen">{{ labelDoorButton }}</button>
                     </div>
                     <hr>
 
