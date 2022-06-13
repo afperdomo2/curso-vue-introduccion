@@ -17,7 +17,11 @@
                 return {
                     title: "Aprendiendo Vue",
                     text: "Curso de platzi",
-                    textHtml: "<p>Texto en html</p>"
+                    textHtml: "<p>Tamaño de la imagen (px)</p>",
+                    img: {
+                        height: 200,
+                        url: "https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ"
+                    }
                 };
             },
             template: `
@@ -25,6 +29,9 @@
                     <h1 v-once v-text="title"></h1>
                     <h6>{{ text }}</h6>
                     <div v-html="textHtml"></div>
+                    <input type="list" v-model="img.height"/>
+                    <br><br>
+                    <img :src="img.url" :alt="img.url" :height="img.height"/>
                 </div>`
         }).mount('#app');
         console.log(vm);
