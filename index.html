@@ -15,11 +15,25 @@
         const vm = Vue.createApp({
             data() {
                 return {
-                    text: "Hola mundo"
+                    title: "Aprendiendo Vue",
+                    text: "Curso de platzi",
+                    textHtml: "<p>Texto en html</p>"
                 };
-            }
+            },
+            template: `
+                <div>
+                    <h1 v-once v-text="title"></h1>
+                    <h6>{{ text }}</h6>
+                    <div v-html="textHtml"></div>
+                </div>`
         }).mount('#app');
         console.log(vm);
+
+        /*
+        * v-text = Directiva para actualizar un elemento de tipo texto, igual que {{}}
+        * v-once = Permite renderizar solo la primera vez
+        * v-html = Permite escapar las etiquetas html en el texto
+        */
     </script>
 </body>
 </html>
