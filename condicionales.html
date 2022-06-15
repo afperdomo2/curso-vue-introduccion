@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <div id="app">{{ text }}</div>
+
+    <script>
+        const vm = Vue.createApp({
+            data() {
+                return {
+                    username: "",
+                    login: false
+                };
+            },
+            watch: {
+                login(value, old) {
+                    if (!value)
+                        this.username = "";
+                }
+            },
+            template: `
+                <div>
+                    <h1>Condicionales</h1>
+                    <div class="container" :class="{ 'login': login, 'closed': !login }">
+
+                        <div v-if="login">
+                            Hola, {{ username }}
+                        </div>
+                        <div v-else>
+                            <label>Usuario: </label>
+                            <input type="text" v-model="username">
+                        </div>
+
+                        <br>
+                        <button @click="login = !login">
+                            {{ !login ? '➡️Acceder' : '❌Salir' }}
+                        </button>
+                    </div>
+                </div>`
+        }).mount('#app');
+    </script>
+    <style>
+        html, body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #app, .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+        }
+        .closed {
+            background-color: #eca1a6;
+        }
+        .login {
+            background-color: #b5e7a0;
+        }
+    </style>
+</body>
+</html>
