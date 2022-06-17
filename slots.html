@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <div id="app">{{ text }}</div>
+
+    <script>
+        const app = Vue.createApp({
+            template: `
+                <div>
+                    <v-header>
+                        <template v-slot:header>
+                            <h1>Título</h1>
+                        </template>
+                        <template v-slot:content>
+                            <p>Contenido de pruebas</p>
+                            <button>Botón de pruebas</button>
+                        </template>
+                    </v-header>
+                </div>
+            `
+        });
+
+        /*
+        * los slots sirven para aprovechar la sintaxis de HTML y utilizar
+        * nuestros componentes. Así como en HTML donde no todas las etiquetas
+        * son de contenido, si no que también existen etiquetas contenedoras
+        */
+        app.component("v-header", {
+            template: `
+                <header>
+                    <slot name="header"></slot>
+                </header>
+                <div>
+                    <slot name="content"></slot>
+                </div>`
+        });
+
+        const vm = app.mount('#app');
+    </script>
+</body>
+</html>
