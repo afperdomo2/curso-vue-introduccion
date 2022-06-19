@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <div id="app">{{ text }}</div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    items: ["uno", "dos", "tres"]
+                }
+            },
+            template: `
+                <ul>
+                    <v-item v-for="item in items" v-bind:text="item" v-bind:text2="item"></v-item>
+                </ul>
+            `
+        });
+
+        app.component("v-item", {
+            props: {
+                text: {
+                    type: String,
+                    default: "pruebas"
+                },
+                text2: String
+            },
+            template: `
+                <li>
+                    {{ text }}
+                </li>`
+        });
+
+        const vm = app.mount('#app');
+    </script>
+</body>
+</html>
