@@ -18,21 +18,19 @@
                     text: "hola vue"
                 }
             },
-            methods: {
-                updateText(e) {
-                    this.text = e;
-                }
-            },
             template: `
                 <div>
                     <p>{{ text }}</p>
-                    <v-input :value="text" @updateText="updateText" />
+                    <v-input v-model:value="text" />
                 </div>
             `
         });
         /*
-        * @updateText = Va a ser la función que se le va a pasar al componente hijo
-        * Si se quiere se le puede cambiar el nombre para evitar confusiones
+        * Componente personalizado: <v-input v-model:value="text" />
+        * :value  => Es el nombre del prop que se va a enviar al componente hijo
+        * ="text" => Es la variable de data que se va a actualizar
+        *
+        * Esto crea la reactividad entre el data=text y el props=value
         */
         app.component("v-input", {
             props: {
@@ -40,7 +38,7 @@
             },
             methods: {
                 updateTextFather(e) {
-                    this.$emit("updateText", e.target.value);
+                    this.$emit("update:value", e.target.value);
                 }
             },
             template: `
