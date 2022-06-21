@@ -18,23 +18,29 @@
                     items: ["uno", "dos", "tres"]
                 }
             },
+            methods: {
+                remove(i) {
+                    this.items = this.items.filter((el, index) => index !== i);
+                }
+            },
             template: `
                 <ul>
-                    <v-item v-for="item in items" v-bind:text="item" v-bind:text2="item"></v-item>
+                    <v-item
+                        v-for="(item, i) in items"
+                        :key="i"
+                        :text="item"
+                        @remove="remove(i)"
+                    />
                 </ul>
             `
         });
 
         app.component("v-item", {
             props: {
-                text: {
-                    type: String,
-                    default: "pruebas"
-                },
-                text2: String
+                text: String
             },
             template: `
-                <li>
+                <li @click="$emit('remove')">
                     {{ text }}
                 </li>`
         });
